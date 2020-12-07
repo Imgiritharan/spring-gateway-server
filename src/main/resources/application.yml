@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: gateway-server
+  cloud:
+    consul.enabled: false
+    gateway:
+      routes:
+        - id: hello_world_route
+          uri: http://localhost:9003
+          predicates:
+            - Path=/hello-world
+          filters:
+            - AddRequestHeader=X-Request-red, blue
+            - name: Custom
+              args:
+                property: Test property
+
+server:
+  port: 7000
+
+logging:
+  level:
+    root: INFO
